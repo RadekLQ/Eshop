@@ -7,6 +7,10 @@ public class Customer extends User {
     public Customer() {
     }
 
+    public Customer(int userId, String name, String firstname, String email, String address) {
+        super(userId, name, firstname, email, address);
+    }
+
     public Customer(int userId, String name, String firstname, String email, String address, String username, String password) {
         super(userId, name, firstname, email, address);
         this.username = username;

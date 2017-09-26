@@ -125,6 +125,4 @@ public class BasketDaoImpl implements BasketDao {
             LOGGER.error("Could nog connect to database: " + e);
         }
     }
-
-
 }

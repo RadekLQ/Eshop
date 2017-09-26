@@ -26,6 +26,9 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public Customer findCustomer(String name, String firstname) {
+//
+//        addToList(SELECT_SQL + " WHERE name = '" + productname + "';");
+//        return products;
         return null;
     }
 
