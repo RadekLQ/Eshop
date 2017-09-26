@@ -18,7 +18,13 @@ public class Product implements Comparable<Product> {
         this.stock = stock;
     }
 
-    public static Comparator<Product> sortBasedOnProductName() {return Comparator.comparing(Product::getProductname);}
+    public static Comparator<Product> sortBasedOnProductName() {
+        return Comparator.comparing(Product::getProductname);
+    }
+
+    public static Comparator<Product> sortBasedOnProductId() {
+        return Comparator.comparing(Product::getProductId);
+    }
 
     public Integer getProductId() {
         return productId;
@@ -53,33 +59,10 @@ public class Product implements Comparable<Product> {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Product product = (Product) o;
-
-        if (!productId.equals(product.productId)) return false;
-        if (!productname.equals(product.productname)) return false;
-        if (!price.equals(product.price)) return false;
-        return stock.equals(product.stock);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = productId.hashCode();
-        result = 31 * result + productname.hashCode();
-        result = 31 * result + price.hashCode();
-        result = 31 * result + stock.hashCode();
-        return result;
-    }
-
-
-    @Override
     public String toString() {
         return String.format(
-                "%-15d Product name: %-15s Price: %-15s Stock: %5dpieces",
-                productId,  productname, price,  stock);
+                "%-15d Product name: %-15s Price: %-15s Stock: %5dpcs",
+                productId, productname, price, stock);
     }
 
     @Override
