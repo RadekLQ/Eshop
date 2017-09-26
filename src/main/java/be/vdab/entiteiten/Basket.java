@@ -18,7 +18,7 @@ public class Basket {
         Product product = null;
         List<Product> products = new ProductDao().getProducts();
         for (Product prod : products) {
-            if (prod.getIdProduct() == productId) {
+            if (prod.getProductId() == productId) {
                 product = prod;
                 break;
             }
@@ -37,7 +37,7 @@ public class Basket {
 
     void printBasketItems() {
         for(Product prod: basketItems) {
-            System.out.print(prod.getName());
+            System.out.print(prod.getProductname());
         }
     }
 

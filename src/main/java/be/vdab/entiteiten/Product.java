@@ -1,35 +1,35 @@
 package be.vdab.entiteiten;
 
-public class Product {
-    private Integer idProduct;
-    private String name;
+public class Product implements Comparable<Product> {
+    private Integer productId;
+    private String productname;
     private Double price;
     private Integer stock;
 
     public Product() {
     }
 
-    public Product(Integer idProduct, String name, Double price, Integer stock) {
-        this.idProduct = idProduct;
-        this.name = name;
+    public Product(Integer productId, String productname, Double price, Integer stock) {
+        this.productId = productId;
+        this.productname = productname;
         this.price = price;
         this.stock = stock;
     }
 
-    public Integer getIdProduct() {
-        return idProduct;
+    public Integer getProductId() {
+        return productId;
     }
 
-    public void setIdProduct(Integer idProduct) {
-        this.idProduct = idProduct;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
-    public String getName() {
-        return name;
+    public String getProductname() {
+        return productname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductname(String productname) {
+        this.productname = productname;
     }
 
     public Double getPrice() {
@@ -55,18 +55,32 @@ public class Product {
 
         Product product = (Product) o;
 
-        if (!idProduct.equals(product.idProduct)) return false;
-        if (!name.equals(product.name)) return false;
+        if (!productId.equals(product.productId)) return false;
+        if (!productname.equals(product.productname)) return false;
         if (!price.equals(product.price)) return false;
         return stock.equals(product.stock);
     }
 
     @Override
     public int hashCode() {
-        int result = idProduct.hashCode();
-        result = 31 * result + name.hashCode();
+        int result = productId.hashCode();
+        result = 31 * result + productname.hashCode();
         result = 31 * result + price.hashCode();
         result = 31 * result + stock.hashCode();
         return result;
     }
+
+
+    @Override
+    public String toString() {
+        return String.format(
+                "%-15d Product name: %-15s Price: %-15s Stock: %5dml",
+                productId,  productname, price,  stock);
+    }
+
+    @Override
+    public int compareTo(Product o) {
+        return this.productId - o.productId;
+    }
 }
+
