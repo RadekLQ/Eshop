@@ -1,5 +1,6 @@
 package be.vdab.entiteiten;
 
+import java.util.Comparator;
 import java.util.Date;
 
 public class Order implements Comparable<Order> {
@@ -59,16 +60,12 @@ public class Order implements Comparable<Order> {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
     public int getEshopId() {
         return eshopId;
     }
 
-    public void setEshopId(int eshopId) {
-        this.eshopId = eshopId;
+    public static Comparator<Order> sortBasedOnOrderId() {
+        return Comparator.comparing(Order::getOrderId);
     }
 
     @Override
