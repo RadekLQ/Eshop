@@ -2,23 +2,13 @@ package be.vdab.dao;
 
 import be.vdab.entiteiten.Product;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDao {
-    private final List<Product> products = new ArrayList<Product>();
+public interface ProductDao {
 
-    public ProductDao() {
-        this.initShopItems();
-    }
+    public List<Product> getProducts();
 
-    public List<Product> getProducts() {
-        return products;
-    }
+    public void initShopItems();
 
-    public void initShopItems() {
-
-    }
-
-
+    List<Product> findProducts(String productname);
 }

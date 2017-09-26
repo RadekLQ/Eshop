@@ -1,5 +1,7 @@
 package be.vdab.entiteiten;
 
+import java.util.Comparator;
+
 public class Product implements Comparable<Product> {
     private Integer productId;
     private String productname;
@@ -15,6 +17,8 @@ public class Product implements Comparable<Product> {
         this.price = price;
         this.stock = stock;
     }
+
+    public static Comparator<Product> sortBasedOnProductName() {return Comparator.comparing(Product::getProductname);}
 
     public Integer getProductId() {
         return productId;
@@ -74,7 +78,7 @@ public class Product implements Comparable<Product> {
     @Override
     public String toString() {
         return String.format(
-                "%-15d Product name: %-15s Price: %-15s Stock: %5dml",
+                "%-15d Product name: %-15s Price: %-15s Stock: %5dpieces",
                 productId,  productname, price,  stock);
     }
 

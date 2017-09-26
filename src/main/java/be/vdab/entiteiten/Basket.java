@@ -1,6 +1,6 @@
 package be.vdab.entiteiten;
 
-import be.vdab.dao.ProductDao;
+import be.vdab.dao.impl.ProductDaoImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class Basket {
 
     private Product getProductByProductId(int productId) {
         Product product = null;
-        List<Product> products = new ProductDao().getProducts();
+        List<Product> products = new ProductDaoImpl().getProducts();
         for (Product prod : products) {
             if (prod.getProductId() == productId) {
                 product = prod;
