@@ -69,7 +69,7 @@ public class BasketDaoImpl implements BasketDao {
 
             int result = stmt.executeUpdate();
 
-            LOGGER.debug(result + " product added to basket");
+            LOGGER.debug(result + " product deleted from basket");
 
         } catch (SQLException e) {
             LOGGER.error("Could nog connect to database: " + e);
