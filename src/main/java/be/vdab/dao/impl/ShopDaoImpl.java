@@ -2,7 +2,6 @@ package be.vdab.dao.impl;
 
 import be.vdab.dao.ShopDao;
 import be.vdab.entiteiten.Eshop;
-import be.vdab.entiteiten.Product;
 import be.vdab.entiteiten.Shop;
 import org.apache.log4j.Logger;
 
@@ -19,7 +18,7 @@ public class ShopDaoImpl implements ShopDao {
     private static final Logger LOGGER = Logger.getLogger(ShopDaoImpl.class);
 
     private static final String KOLOM_ESHOPID = "idEshop";
-    private static final String KOLOM_INFO = "Info";
+    private static final String KOLOM_INFO = "info";
     private static final String KOLOM_ADDRESS = "address";
 
     private List<Shop> shops;
@@ -28,12 +27,49 @@ public class ShopDaoImpl implements ShopDao {
     public List<Shop> listAllShops() {
         addToList(SELECT_SQL);
         return shops;
+    }
 
+    @Override
+    public void deleteShopFromShops(Shop shop) {
+        String sql = "DELETE eshop (idEshop, info, address) VALUES(?,?,?);";
+
+        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setInt(1, shop.getShopId());
+            stmt.setString(2, shop.getInfo());
+            stmt.setString(3, shop.getAddress());
+
+            int result = stmt.executeUpdate();
+
+            LOGGER.debug(result + " deleted a e-shop from e-shops");
+
+        } catch (SQLException e) {
+            LOGGER.error("Could nog connect to database: " + e);
+        }
+    }
+
+    @Override
+    public void updateShopFromShops(Shop shop) {
+        String sql = "UPDATE eshop (idEshop, info, address) VALUES(?,?,?);";
+
+        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setInt(1, shop.getShopId());
+            stmt.setString(2, shop.getInfo());
+            stmt.setString(3, shop.getAddress());
+
+            int result = stmt.executeUpdate();
+
+            LOGGER.debug(result + " updated a e-shop from e-shops");
+
+        } catch (SQLException e) {
+            LOGGER.error("Could nog connect to database: " + e);
+        }
     }
 
     public void addShop(Shop shop) {
 
-        String sql = "INSERT INTO eshop (idEshop, Info, address) VALUES(?,?,?);";
+        String sql = "INSERT INTO eshop (idEshop, info, address) VALUES(?,?,?);";
 
         try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
 

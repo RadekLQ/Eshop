@@ -1,6 +1,5 @@
 package be.vdab.dao;
 
-import be.vdab.entiteiten.Eshop;
 import be.vdab.entiteiten.Shop;
 
 import java.util.List;
@@ -8,4 +7,9 @@ import java.util.List;
 public interface ShopDao {
 
     List<Shop> listAllShops();
+
+    void deleteShopFromShops(Shop shop);
+
+    void updateShopFromShops(Shop shop);
+
 }
