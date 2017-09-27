@@ -1,7 +1,7 @@
 package be.vdab.dao;
 
-import be.vdab.entiteiten.User;
 import be.vdab.entiteiten.Order;
+import be.vdab.entiteiten.User;
 
 import java.util.List;
 
@@ -14,5 +14,4 @@ public interface OrderDao {
     void deleteOrder(Order order); /* -*implemented*- */
 
     void updateOrder(Order order); /* -*implemented*- */
-
 }

@@ -1,8 +1,8 @@
 package be.vdab.dao.impl;
 
 import be.vdab.dao.OrderDao;
-import be.vdab.entiteiten.User;
 import be.vdab.entiteiten.Order;
+import be.vdab.entiteiten.User;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -24,7 +24,6 @@ public class OrderDaoImpl implements OrderDao {
     private static final String KOLOM_DATE = "dateOrder";
     private static final String KOLOM_CUSTOMERID = "cusomerId";
     private static final String KOLOM_ESHOPID = "eshopId";
-
 
     private List<Order> orders;
 

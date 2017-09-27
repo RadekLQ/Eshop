@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProductDao {
 
-    List<Product> findProducts(String productname);
+    List<Product> findProducts(String productname); /* -implemented- */
 
     void deleteProduct(Product product); /* -implemented- */
 

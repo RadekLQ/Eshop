@@ -16,6 +16,10 @@ public abstract class Shop implements Comparable<Shop> {
         this.address = address;
     }
 
+    public static Comparator<Shop> sortBasedOnShopId() {
+        return Comparator.comparing(Shop::getShopId);
+    }
+
     public Integer getShopId() {
         return shopId;
     }
@@ -40,10 +44,6 @@ public abstract class Shop implements Comparable<Shop> {
         this.address = address;
     }
 
-    public static Comparator<Shop> sortBasedOnShopId() {
-        return Comparator.comparing(Shop::getShopId);
-    }
-
     @Override
     public int compareTo(Shop o) {
         return this.shopId - o.shopId;
@@ -51,6 +51,6 @@ public abstract class Shop implements Comparable<Shop> {
 
     @Override
     public String toString() {
-        return String.format("%d %s %s",shopId, "Info:",info,"Address:",address);
+        return String.format("%d %s %s", shopId, "Info:", info, "Address:", address);
     }
 }

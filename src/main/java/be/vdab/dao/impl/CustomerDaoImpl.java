@@ -14,7 +14,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public Customer findCustomer(String name, String firstname, String username) {
 
-        String sql = "Select * from customer where Name = ? and firstname = ? and username = ?";
+        String sql = "Select * from customer where name = ? and firstname = ? and username = ?";
 
         try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
 
@@ -35,7 +35,6 @@ public class CustomerDaoImpl implements CustomerDao {
                 password = rs.getString("Password");
                 address = rs.getString("DeliveryAdress");
                 email = rs.getString("E-mail");
-
             }
 
             return new Customer(username, password, customerId, name, firstname, address, email);
@@ -46,17 +45,14 @@ public class CustomerDaoImpl implements CustomerDao {
         return null;
     }
 
-
     @Override
     public User findByLoginAndUsername(String username, String password) {
 
-        String sql = "Select * from customer where Username = ? and Password = ?";
-
+        String sql = "Select * from customer where username = ? and password = ?";
 
         try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setString(1, username);
             stmt.setString(2, password);
-
 
             ResultSet rs = stmt.executeQuery();
 
@@ -74,12 +70,10 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public void updateCustomer(User user) {
-
     }
 
     @Override
     public void deleteCustomer(User user) {
-
     }
 
     private Connection getConnection() throws SQLException {
