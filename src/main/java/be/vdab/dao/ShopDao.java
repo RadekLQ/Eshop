@@ -8,8 +8,7 @@ public interface ShopDao {
 
     List<Shop> listAllShops(); /* implemented */
 
+    void updateShop(Shop shop); /* -*implemented*- */
+
     void deleteShop(Shop shop); /* -*implemented*- */
-
-    void saveOrUpdateShop(Shop shop); /* -*implemented*- */
-
 }

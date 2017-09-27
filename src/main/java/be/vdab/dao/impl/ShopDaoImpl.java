@@ -30,6 +30,25 @@ public class ShopDaoImpl implements ShopDao {
     }
 
     @Override
+    public void updateShop(Shop shop) {
+        String sql = "UPDATE eshop (idEshop, info, address) VALUES(?,?,?);";
+
+        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setInt(1, shop.getShopId());
+            stmt.setString(2, shop.getInfo());
+            stmt.setString(3, shop.getAddress());
+
+            int result = stmt.executeUpdate();
+
+            LOGGER.debug(result + " updated a e-shop from e-shops");
+
+        } catch (SQLException e) {
+            LOGGER.error("Could nog connect to database: " + e);
+        }
+    }
+
+    @Override
     public void deleteShop(Shop shop) {
         String sql = "DELETE eshop (idEshop, info, address) VALUES(?,?,?);";
 
@@ -42,25 +61,6 @@ public class ShopDaoImpl implements ShopDao {
             int result = stmt.executeUpdate();
 
             LOGGER.debug(result + " deleted a e-shop from e-shops");
-
-        } catch (SQLException e) {
-            LOGGER.error("Could nog connect to database: " + e);
-        }
-    }
-
-    @Override
-    public void saveOrUpdateShop(Shop shop) {
-        String sql = "UPDATE eshop (idEshop, info, address) VALUES(?,?,?);";
-
-        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
-
-            stmt.setInt(1, shop.getShopId());
-            stmt.setString(2, shop.getInfo());
-            stmt.setString(3, shop.getAddress());
-
-            int result = stmt.executeUpdate();
-
-            LOGGER.debug(result + " updated a e-shop from e-shops");
 
         } catch (SQLException e) {
             LOGGER.error("Could nog connect to database: " + e);

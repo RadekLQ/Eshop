@@ -37,6 +37,15 @@ public class CustomerDaoImpl implements CustomerDao {
         return null;
     }
 
+    @Override
+    public void updateShop(Customer customer) {
+
+    }
+
+    @Override
+    public void deleteCustomer(Customer customer) {
+
+    }
 
 
     private Connection getConnection() throws SQLException {
