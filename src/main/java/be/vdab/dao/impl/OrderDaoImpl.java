@@ -1,10 +1,8 @@
 package be.vdab.dao.impl;
 
 import be.vdab.dao.OrderDao;
-import be.vdab.entiteiten.Customer;
-import be.vdab.entiteiten.Eshop;
+import be.vdab.entiteiten.User;
 import be.vdab.entiteiten.Order;
-import be.vdab.entiteiten.Shop;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -16,7 +14,8 @@ import java.util.Properties;
 
 public class OrderDaoImpl implements OrderDao {
 
-    private static final String SELECT_SQL = "SELECT idOrder,paymentMethod,orderTotal,dateOrder,cusomerId,eshopId FROM eshop.`order`;";
+    private static final String SELECT_SQL = "SELECT idOrder,paymentMethod,orderTotal,dateOrder,cusomerId,eshopId " +
+            "FROM eshop.`order`;";
     private static final Logger LOGGER = Logger.getLogger(OrderDaoImpl.class);
 
     private static final String KOLOM_IDORDER = "idOrder";
@@ -30,8 +29,8 @@ public class OrderDaoImpl implements OrderDao {
     private List<Order> orders;
 
     @Override
-    public List<Order> findOrdersFromCustomers(Customer customer) {
-        addToList(SELECT_SQL + " WHERE customer = '" + customer + "';");
+    public List<Order> findOrdersFromCustomers(User user) {
+        addToList(SELECT_SQL + " WHERE user = '" + user + "';");
         return orders;
     }
 
@@ -111,7 +110,8 @@ public class OrderDaoImpl implements OrderDao {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return DriverManager.getConnection(prop.getProperty("jdbc.url"), prop.getProperty("jdbc.user"), prop.getProperty("jdbc.password"));
+        return DriverManager.getConnection(prop.getProperty("jdbc.url"), prop.getProperty("jdbc.user"),
+                prop.getProperty("jdbc.password"));
     }
 
     private void addToList(String sql) {

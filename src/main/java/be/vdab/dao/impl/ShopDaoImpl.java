@@ -94,7 +94,8 @@ public class ShopDaoImpl implements ShopDao {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return DriverManager.getConnection(prop.getProperty("jdbc.url"), prop.getProperty("jdbc.user"), prop.getProperty("jdbc.password"));
+        return DriverManager.getConnection(prop.getProperty("jdbc.url"), prop.getProperty("jdbc.user"),
+                prop.getProperty("jdbc.password"));
     }
 
     private void addToList(String sql) {

@@ -3,50 +3,84 @@ package be.vdab.dao.impl;
 import be.vdab.dao.CustomerDao;
 import be.vdab.entiteiten.Customer;
 import be.vdab.entiteiten.User;
-import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
+
 
 public class CustomerDaoImpl implements CustomerDao {
 
-    private static final String SELECT_SQL = "SELECT idCustomer,name,firstName,eMail,deliveryAdress FROM customer;;";
-    private static final Logger LOGGER = Logger.getLogger(CustomerDaoImpl.class);
-
-    private static final String KOLOM_IDCUSTOMER = "idCustomer";
-    private static final String KOLOM_NAME = "name";
-    private static final String KOLOM_FIRSTNAME = "firstName";
-    private static final String KOLOM_EMAIL = "eMail";
-    private static final String KOLOM_ADDRESS = "deliveryAdress";
-
-    private List<Customer> customers;
-
     @Override
-    public Customer findCustomer(String name, String firstname) {
-//
-//        addToList(SELECT_SQL + " WHERE name = '" + productname + "';");
-//        return products;
+    public Customer findCustomer(String name, String firstname, String username) {
+
+        String sql = "Select * from customer where Name = ? and firstname = ? and username = ?";
+
+        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setString(1, name);
+            stmt.setString(2, firstname);
+            stmt.setString(3, username);
+
+            ResultSet rs = stmt.executeQuery();
+
+            int customerId = 0;
+            String password = "";
+            String address = "";
+            String email = "";
+
+            if (rs.next()) {
+
+                customerId = rs.getInt("customerId");
+                password = rs.getString("Password");
+                address = rs.getString("DeliveryAdress");
+                email = rs.getString("E-mail");
+
+            }
+
+            return new Customer(username, password, customerId, name, firstname, address, email);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
+
 
     @Override
     public User findByLoginAndUsername(String username, String password) {
+
+        String sql = "Select * from customer where Username = ? and Password = ?";
+
+
+        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+
+                return new User(rs.getInt("customerId"), rs.getString("Username"), rs.getString("Password"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 
     @Override
-    public void updateShop(Customer customer) {
+    public void updateCustomer(User user) {
 
     }
 
     @Override
-    public void deleteCustomer(Customer customer) {
+    public void deleteCustomer(User user) {
 
     }
-
 
     private Connection getConnection() throws SQLException {
         Properties prop = new Properties();
@@ -56,30 +90,7 @@ public class CustomerDaoImpl implements CustomerDao {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return DriverManager.getConnection(prop.getProperty("jdbc.url"), prop.getProperty("jdbc.user"), prop.getProperty("jdbc.password"));
-    }
-
-    private void addToList(String sql) {
-
-        customers = new ArrayList<>();
-
-        try (Connection con = getConnection(); Statement stmt = con.createStatement()) {
-
-            ResultSet rs = stmt.executeQuery(sql);
-
-            while (rs.next()) {
-
-                int userId = rs.getInt(KOLOM_IDCUSTOMER);
-                String name = rs.getString(KOLOM_NAME);
-                String firstname = rs.getString(KOLOM_FIRSTNAME);
-                String email = rs.getString(KOLOM_EMAIL);
-                String address = rs.getString(KOLOM_ADDRESS);
-
-                customers.add(new Customer(userId, name, firstname, email, address));
-            }
-
-        } catch (SQLException e) {
-            LOGGER.error("Could nog connect to database: " + e);
-        }
+        return DriverManager.getConnection(prop.getProperty("jdbc.url"),
+                prop.getProperty("jdbc.user"), prop.getProperty("jdbc.password"));
     }
 }
