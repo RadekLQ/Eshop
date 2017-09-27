@@ -1,6 +1,7 @@
 package be.vdab.entiteiten;
 
 public class Customer extends User {
+    private int customerId;
     private String username;
     private String password;
 
@@ -11,10 +12,19 @@ public class Customer extends User {
         super(userId, name, firstname, email, address);
     }
 
-    public Customer(int userId, String name, String firstname, String email, String address, String username, String password) {
+    public Customer(int userId, String name, String firstname, String email, String address, int customerId, String username, String password) {
         super(userId, name, firstname, email, address);
+        this.customerId = customerId;
         this.username = username;
         this.password = password;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getUsername() {
