@@ -29,11 +29,24 @@ public class BasketDaoImpl implements BasketDao {
         producten = Lists.newArrayList();
     }
 
-
-
     @Override
-    public void saveOrUpdateBasket(Basket basket) {
-        producten.addAll(producten);
+    public void saveOrUpdateBasket(Product product) /*(Basket basket)*/ {
+        String sql = "UPDATE product (productId, name, price, stock) VALUES(?,?,?,?);";
+
+        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setInt(1, product.getProductId());
+            stmt.setString(2, product.getProductname());
+            stmt.setDouble(3, product.getPrice());
+            stmt.setInt(4, product.getStock());
+
+            int result = stmt.executeUpdate();
+
+            LOGGER.debug(result + " product added to basket");
+
+        } catch (SQLException e) {
+            LOGGER.error("Could nog connect to database: " + e);
+        }
     }
 
     @Override
@@ -89,7 +102,15 @@ public class BasketDaoImpl implements BasketDao {
 
     @Override
     public void clearBasket() {
-        addToList(SELECT_SQL + "");
+//        String sql = "Delete product (productId, name, price, stock) FROM product;";
+//        try (Connection con = getConnection(); Statement stmt = con.createStatement()) {
+//            ResultSet rs = stmt.executeQuery(sql);
+//            rs.next();
+//            return rs.getDouble("totaal");
+//        } catch (SQLException e) {
+//            LOGGER.error("Could nog connect to database: " + e);
+//        }
+//        return 0;
     }
 
     private Connection getConnection() throws SQLException {
@@ -119,6 +140,29 @@ public class BasketDaoImpl implements BasketDao {
                 int stock = rs.getInt(KOLOM_STOCK);
 
                 producten.add(new Product(ProductId, name, price, stock));
+            }
+
+        } catch (SQLException e) {
+            LOGGER.error("Could nog connect to database: " + e);
+        }
+    }
+
+    private void removeFromList(String sql) {
+
+        producten = new ArrayList<>();
+
+        try (Connection con = getConnection(); Statement stmt = con.createStatement()) {
+
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+
+                int ProductId = rs.getInt(KOLOM_IDPRODUCT);
+                String name = rs.getString(KOLOM_NAME);
+                double price = rs.getDouble(KOLOM_PRICE);
+                int stock = rs.getInt(KOLOM_STOCK);
+
+                producten.remove(new Product(ProductId, name, price, stock));
             }
 
         } catch (SQLException e) {

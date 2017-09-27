@@ -18,6 +18,10 @@ public class OrderDetail implements Comparable<OrderDetail> {
         this.productId = productId;
     }
 
+    public static Comparator<OrderDetail> sortBasedOnOrderDetailId() {
+        return Comparator.comparing(OrderDetail::getOrderDetailId);
+    }
+
     public Integer getOrderDetailId() {
         return orderDetailId;
     }
@@ -42,13 +46,9 @@ public class OrderDetail implements Comparable<OrderDetail> {
         return productId;
     }
 
-    public static Comparator<OrderDetail> sortBasedOnOrderDetailId() {
-        return Comparator.comparing(OrderDetail::getOrderDetailId);
-    }
-
     @Override
     public String toString() {
-        return String.format("%d %s %s %s",orderDetailId,"Amount:",amount,"OrderId:",orderId,"ProductId:",productId);
+        return String.format("%d %s %s %s", orderDetailId, "Amount:", amount, "OrderId:", orderId, "ProductId:", productId);
     }
 
     @Override

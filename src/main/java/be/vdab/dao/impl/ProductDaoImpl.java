@@ -20,17 +20,76 @@ public class ProductDaoImpl implements ProductDao {
     private static final String KOLOM_NAME = "name";
     private static final String KOLOM_PRICE = "price";
     private static final String KOLOM_STOCK = "stock";
+    private List<Product> products;
 
     public ProductDaoImpl() {
         products = Lists.newArrayList();
     }
 
-    private List<Product> products;
-
     @Override
     public List<Product> findProducts(String productname) {
         addToList(SELECT_SQL + " WHERE name = '" + productname + "';");
         return products;
+    }
+
+    @Override
+    public void deleteProduct(Product product) {
+        String sql = "DELETE product (idProduct,name,price,stock) VALUES(?,?,?,?);";
+
+        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setInt(1, product.getProductId());
+            stmt.setString(2, product.getProductname());
+            stmt.setDouble(3, product.getPrice());
+            stmt.setInt(4, product.getStock());
+
+            int result = stmt.executeUpdate();
+
+            LOGGER.debug(result + " deleted a product from products");
+
+        } catch (SQLException e) {
+            LOGGER.error("Could nog connect to database: " + e);
+        }
+    }
+
+    @Override
+    public void updateProduct(Product product) {
+        String sql = "INSERT INTO product (idProduct,name,price,stock) VALUES(?,?,?,?);";
+
+        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setInt(1, product.getProductId());
+            stmt.setString(2, product.getProductname());
+            stmt.setDouble(3, product.getPrice());
+            stmt.setInt(4, product.getStock());
+
+            int result = stmt.executeUpdate();
+
+            LOGGER.debug(result + " updated a product from products");
+
+        } catch (SQLException e) {
+            LOGGER.error("Could nog connect to database: " + e);
+        }
+    }
+
+    public void addProduct(Product product) {
+
+        String sql = "INSERT INTO product (idProduct,name,price,stock) VALUES(?,?,?,?);";
+
+        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setInt(1, product.getProductId());
+            stmt.setString(2, product.getProductname());
+            stmt.setDouble(3, product.getPrice());
+            stmt.setInt(4, product.getStock());
+
+            int result = stmt.executeUpdate();
+
+            LOGGER.debug(result + " added a new product to products");
+
+        } catch (SQLException e) {
+            LOGGER.error("Could nog connect to database: " + e);
+        }
     }
 
     private Connection getConnection() throws SQLException {

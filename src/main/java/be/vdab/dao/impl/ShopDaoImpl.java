@@ -30,7 +30,7 @@ public class ShopDaoImpl implements ShopDao {
     }
 
     @Override
-    public void deleteShopFromShops(Shop shop) {
+    public void deleteShop(Shop shop) {
         String sql = "DELETE eshop (idEshop, info, address) VALUES(?,?,?);";
 
         try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -49,7 +49,7 @@ public class ShopDaoImpl implements ShopDao {
     }
 
     @Override
-    public void updateShopFromShops(Shop shop) {
+    public void saveOrUpdateShop(Shop shop) {
         String sql = "UPDATE eshop (idEshop, info, address) VALUES(?,?,?);";
 
         try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -107,11 +107,11 @@ public class ShopDaoImpl implements ShopDao {
 
             while (rs.next()) {
 
-                int ShopId = rs.getInt(KOLOM_ESHOPID);
-                String Info = rs.getString(KOLOM_INFO);
-                String Address = rs.getString(KOLOM_ADDRESS);
+                int shopId = rs.getInt(KOLOM_ESHOPID);
+                String info = rs.getString(KOLOM_INFO);
+                String address = rs.getString(KOLOM_ADDRESS);
 
-                shops.add(new Eshop(ShopId, Info, Address));
+                shops.add(new Eshop(shopId, info, address));
             }
 
         } catch (SQLException e) {

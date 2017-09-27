@@ -5,15 +5,15 @@ import be.vdab.entiteiten.Product;
 
 public interface BasketDao {
 
-    void saveOrUpdateBasket(Basket basket);
+    void saveOrUpdateBasket(Product product); /*(Basket basket) -not implemented- */
 
     void addProductToBasket(Product product);
 
     void removeProductFromBasket(Product product);
 
-    Basket getBasket();
+    Basket getBasket();  /* -not implemented- */
 
-    void clearBasket();
+    void clearBasket(); /* -not implemented- */
 
 
 }

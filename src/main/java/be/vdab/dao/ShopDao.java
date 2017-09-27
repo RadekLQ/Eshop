@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface ShopDao {
 
-    List<Shop> listAllShops();
+    List<Shop> listAllShops(); /* implemented */
 
-    void deleteShopFromShops(Shop shop);
+    void deleteShop(Shop shop); /* -*implemented*- */
 
-    void updateShopFromShops(Shop shop);
+    void saveOrUpdateShop(Shop shop); /* -*implemented*- */
 
 }
