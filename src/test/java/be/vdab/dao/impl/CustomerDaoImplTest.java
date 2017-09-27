@@ -7,10 +7,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
+//http://www.vogella.com/tutorials/JUnit/article.html
+//https://github.com/junit-team/junit5-samples/blob/r5.0.0-M4/junit5-maven-consumer/pom.xml
 //https://github.com/howtoprogram/junit5-examples/blob/master/junit5-maven-example/src/test/java/com/howtoprogram/junit5/BasicSalaryCalculatorTest.java
 class CustomerDaoImplTest {
     private Customer customer;
@@ -31,7 +31,7 @@ class CustomerDaoImplTest {
     }
 
     @Test
-    void findCustomer() {
+    void testFindCustomerWithValidInput() {
     }
 
     @Test
@@ -43,15 +43,14 @@ class CustomerDaoImplTest {
         user.setPassword(password);
 
         User expectedUser = new User("user123", "password123");
-        assertEquals(expectedUser, user);
+        //assertEquals(expectedUser, user.findByLoginAndUsername("user123","password123"));
     }
 
     @DisplayName("Test findByLoginAndUsername with invalid input")
     @Test
     void testFindByLoginAndUsernameWithInvalidUsername() {
 
-        String username = "";
-        String password = "password123";
+        String username = null;
 
         assertThrows(IllegalArgumentException.class, () -> {
             user.setUsername(username);
@@ -62,8 +61,7 @@ class CustomerDaoImplTest {
     @Test
     void testFindByLoginAndUsernameWithInvalidPassword() {
 
-        String password = "";
-
+        String password = null;
         assertThrows(IllegalArgumentException.class, () -> {
             user.setPassword(password);
         });
