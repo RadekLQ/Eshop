@@ -10,16 +10,15 @@ public class Basket {
     public Basket() {
     }
 
-    public Basket( List<Product> producten, int amount) {
+    public Basket(List<Product> producten, int amount) {
         this.amount = amount;
-
     }
 
-    public void addToBasket(Product product){
+    public void addToBasket(Product product) {
         producten.add(product);
     }
 
-    public void removeFromBasket(Product product){
+    public void removeFromBasket(Product product) {
         producten.remove(product);
     }
 
