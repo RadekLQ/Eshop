@@ -4,7 +4,6 @@ import be.vdab.dao.BasketDao;
 import be.vdab.entiteiten.Basket;
 import be.vdab.entiteiten.Product;
 
-
 public class BasketDaoImpl implements BasketDao {
 
     private Basket basket = new Basket();

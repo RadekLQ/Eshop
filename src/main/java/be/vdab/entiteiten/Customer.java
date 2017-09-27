@@ -9,6 +9,10 @@ public class Customer extends User implements Comparable<Customer> {
     private String email;
     private String address;
 
+    public Customer(String username, String password) {
+        super(username, password);
+    }
+
     public Customer(String username, String password, int customerId, String name, String firstname, String email, String address) {
         super(username, password);
         this.customerId = customerId;
