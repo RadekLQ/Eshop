@@ -1,6 +1,8 @@
 package be.vdab.entiteiten;
 
-public class User {
+import java.util.Comparator;
+
+public class User implements Comparable<User> {
     private int userId;
     private String username;
     private String password;
@@ -9,14 +11,18 @@ public class User {
     }
 
     public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+        setUsername(username);
+        setPassword(password);
     }
 
     public User(int userId, String username, String password) {
-        this.userId = userId;
-        this.username = username;
-        this.password = password;
+        setUserId(userId);
+        setUsername(username);
+        setPassword(password);
+    }
+
+    public static Comparator<User> sortBasedOnUserId() {
+        return Comparator.comparing(User::getUserId);
     }
 
     public int getUserId() {
@@ -36,7 +42,11 @@ public class User {
     public void setUsername(String username) {
         if (username != null && !username.isEmpty()) {
             this.username = username;
+        } else {
+            throw new IllegalArgumentException("Username input is invalid.");
         }
+
+
     }
 
     public String getPassword() {
@@ -46,6 +56,8 @@ public class User {
     public void setPassword(String password) {
         if (password != null && !password.isEmpty()) {
             this.password = password;
+        } else {
+            throw new IllegalArgumentException("Password input is invalid.");
         }
     }
 
@@ -56,4 +68,30 @@ public class User {
                 ", password='" + password +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (userId != user.userId) return false;
+        if (!username.equals(user.username)) return false;
+        return password.equals(user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = userId;
+        result = 31 * result + username.hashCode();
+        result = 31 * result + password.hashCode();
+        return result;
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return this.userId - o.getUserId();
+    }
 }
+

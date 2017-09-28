@@ -9,7 +9,4 @@ public interface CustomerDao {
 
     User findByLoginAndUsername(String username, String password); /* implemented */
 
-    void updateCustomer(User user); /* -*not implemented*- */
-
-    void deleteCustomer(User user); /* -*not implemented*- */
 }

@@ -2,7 +2,7 @@ package be.vdab.entiteiten;
 
 import java.util.Comparator;
 
-public class Customer extends User implements Comparable<Customer> {
+public class Customer extends User {
     private int customerId;
     private String name;
     private String firstname;
@@ -22,7 +22,7 @@ public class Customer extends User implements Comparable<Customer> {
         this.address = address;
     }
 
-    public static Comparator<Customer> sortBasedOnUserId() {
+    public static Comparator<Customer> sortBasedOncustomerId() {
         return Comparator.comparing(Customer::getCustomerId);
     }
 
@@ -76,19 +76,33 @@ public class Customer extends User implements Comparable<Customer> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         Customer customer = (Customer) o;
 
-        return name.equals(customer.name);
+        if (customerId != customer.customerId) return false;
+        if (!name.equals(customer.name)) return false;
+        if (!firstname.equals(customer.firstname)) return false;
+        if (!email.equals(customer.email)) return false;
+        return address.equals(customer.address);
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        int result = super.hashCode();
+        result = 31 * result + customerId;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + firstname.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + address.hashCode();
+        return result;
     }
 
-    @Override
     public int compareTo(Customer o) {
         return this.customerId - o.customerId;
     }
+
+
+
+
 }

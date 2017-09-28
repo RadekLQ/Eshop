@@ -16,7 +16,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
         String sql = "Select * from customer where name = ? and firstname = ? and username = ?";
 
-        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+        try (Connection c = getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
 
             stmt.setString(1, name);
             stmt.setString(2, firstname);
@@ -25,16 +25,16 @@ public class CustomerDaoImpl implements CustomerDao {
             ResultSet rs = stmt.executeQuery();
 
             int customerId = 0;
-            String password = "";
+            String password = "customerId";
             String address = "";
             String email = "";
 
             if (rs.next()) {
 
                 customerId = rs.getInt("customerId");
-                password = rs.getString("Password");
-                address = rs.getString("DeliveryAdress");
-                email = rs.getString("E-mail");
+                password = rs.getString("password");
+                address = rs.getString("deliveryAdress");
+                email = rs.getString("email");
             }
 
             return new Customer(username, password, customerId, name, firstname, address, email);
@@ -50,7 +50,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
         String sql = "Select * from customer where username = ? and password = ?";
 
-        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+        try (Connection c = getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setString(1, username);
             stmt.setString(2, password);
 
@@ -66,14 +66,6 @@ public class CustomerDaoImpl implements CustomerDao {
         }
 
         return null;
-    }
-
-    @Override
-    public void updateCustomer(User user) {
-    }
-
-    @Override
-    public void deleteCustomer(User user) {
     }
 
     private Connection getConnection() throws SQLException {
