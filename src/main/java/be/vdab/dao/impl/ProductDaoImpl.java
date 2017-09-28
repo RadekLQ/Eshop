@@ -5,6 +5,7 @@ import be.vdab.entiteiten.Product;
 import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -26,77 +27,23 @@ public class ProductDaoImpl implements ProductDao {
         products = Lists.newArrayList();
     }
 
+    private DataSource ds;
+
+    public ProductDaoImpl(DataSource ds) {
+        this.ds = ds;
+    }
+
     @Override
     public List<Product> findProducts(String productname) {
         addToList(SELECT_SQL + " WHERE name = '" + productname + "';");
         return products;
     }
 
-    @Override
-    public void deleteProduct(Product product) {
-        String sql = "DELETE product (idProduct,name,price,stock) VALUES(?,?,?,?);";
-
-        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
-
-            stmt.setInt(1, product.getProductId());
-            stmt.setString(2, product.getProductname());
-            stmt.setDouble(3, product.getPrice());
-            stmt.setInt(4, product.getStock());
-
-            int result = stmt.executeUpdate();
-
-            LOGGER.debug(result + " deleted a product from products");
-
-        } catch (SQLException e) {
-            LOGGER.error("Could nog connect to database: " + e);
-        }
-    }
-
-    @Override
-    public void updateProduct(Product product) {
-        String sql = "INSERT INTO product (idProduct,name,price,stock) VALUES(?,?,?,?);";
-
-        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
-
-            stmt.setInt(1, product.getProductId());
-            stmt.setString(2, product.getProductname());
-            stmt.setDouble(3, product.getPrice());
-            stmt.setInt(4, product.getStock());
-
-            int result = stmt.executeUpdate();
-
-            LOGGER.debug(result + " updated a product from products");
-
-        } catch (SQLException e) {
-            LOGGER.error("Could nog connect to database: " + e);
-        }
-    }
-
-    public void addProduct(Product product) {
-
-        String sql = "INSERT INTO product (idProduct,name,price,stock) VALUES(?,?,?,?);";
-
-        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
-
-            stmt.setInt(1, product.getProductId());
-            stmt.setString(2, product.getProductname());
-            stmt.setDouble(3, product.getPrice());
-            stmt.setInt(4, product.getStock());
-
-            int result = stmt.executeUpdate();
-
-            LOGGER.debug(result + " added a new product to products");
-
-        } catch (SQLException e) {
-            LOGGER.error("Could nog connect to database: " + e);
-        }
-    }
-
     private Connection getConnection() throws SQLException {
         Properties prop = new Properties();
         try {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            prop.load(classloader.getResourceAsStream("application.properties"));
+            prop.load(classloader.getResourceAsStream("src/main/later/application.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }

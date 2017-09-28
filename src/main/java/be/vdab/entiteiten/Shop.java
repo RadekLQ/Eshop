@@ -2,7 +2,7 @@ package be.vdab.entiteiten;
 
 import java.util.Comparator;
 
-public abstract class Shop implements Comparable<Shop> {
+public class Shop implements Comparable<Shop> {
     private Integer shopId;
     private String info;
     private String address;

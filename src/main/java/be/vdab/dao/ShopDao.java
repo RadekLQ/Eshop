@@ -6,9 +6,6 @@ import java.util.List;
 
 public interface ShopDao {
 
-    List<Shop> listAllShops(); /* implemented */
+    List<Shop> listAllShops();
 
-    void updateShop(Shop shop); /* -*implemented*- */
-
-    void deleteShop(Shop shop); /* -*implemented*- */
 }

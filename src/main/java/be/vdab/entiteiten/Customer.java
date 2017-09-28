@@ -1,5 +1,6 @@
 package be.vdab.entiteiten;
 
+import javax.sql.DataSource;
 import java.util.Comparator;
 
 public class Customer extends User {
@@ -8,10 +9,11 @@ public class Customer extends User {
     private String firstname;
     private String email;
     private String address;
+    private DataSource ds;
 
-    public Customer(String username, String password) {
-        super(username, password);
+    public Customer() {
     }
+
 
     public Customer(String username, String password, int customerId, String name, String firstname, String email, String address) {
         super(username, password);
@@ -20,6 +22,9 @@ public class Customer extends User {
         this.firstname = firstname;
         this.email = email;
         this.address = address;
+    }
+
+    public Customer(DataSource ds) {
     }
 
     public static Comparator<Customer> sortBasedOncustomerId() {
@@ -101,8 +106,6 @@ public class Customer extends User {
     public int compareTo(Customer o) {
         return this.customerId - o.customerId;
     }
-
-
 
 
 }

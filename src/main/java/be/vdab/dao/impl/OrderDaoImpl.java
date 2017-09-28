@@ -56,56 +56,11 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
-    @Override
-    public void deleteOrder(Order order) {
-        String sql = "DELETE order (idOrder,paymentMethod,orderTotal,dateOrder,cusomerId,eshopId) VALUES(?,?,?,?,?,?);";
-
-        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
-
-            stmt.setInt(1, order.getOrderId());
-            stmt.setString(2, order.getPaymentMethod());
-            stmt.setInt(3, order.getOrderTotal());
-            stmt.setDate(4, (java.sql.Date) order.getDate());
-            stmt.setInt(5, order.getCustomerId());
-            stmt.setInt(6, order.getEshopId());
-
-            int result = stmt.executeUpdate();
-
-            LOGGER.debug(result + " save an order from e-shop");
-
-        } catch (SQLException e) {
-            LOGGER.error("Could nog connect to database: " + e);
-        }
-    }
-
-    @Override
-    public void updateOrder(Order order) {
-
-        String sql = "UPDATE order (idOrder,paymentMethod,orderTotal,dateOrder,cusomerId,eshopId) VALUES(?,?,?,?,?,?);";
-
-        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
-
-            stmt.setInt(1, order.getOrderId());
-            stmt.setString(2, order.getPaymentMethod());
-            stmt.setInt(3, order.getOrderTotal());
-            stmt.setDate(4, (java.sql.Date) order.getDate());
-            stmt.setInt(5, order.getCustomerId());
-            stmt.setInt(6, order.getEshopId());
-
-            int result = stmt.executeUpdate();
-
-            LOGGER.debug(result + " save an order from e-shop");
-
-        } catch (SQLException e) {
-            LOGGER.error("Could nog connect to database: " + e);
-        }
-    }
-
     private Connection getConnection() throws SQLException {
         Properties prop = new Properties();
         try {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            prop.load(classloader.getResourceAsStream("application.properties"));
+            prop.load(classloader.getResourceAsStream("src/main/later/application.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }

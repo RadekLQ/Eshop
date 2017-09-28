@@ -5,8 +5,7 @@ import be.vdab.entiteiten.User;
 
 public interface CustomerDao {
 
-    Customer findCustomer(String name, String firstname, String username); /* implemented  */
+    public Customer findCustomer(String name, String firstname, String username);
 
-    User findByLoginAndUsername(String username, String password); /* implemented */
-
+    public User findByLoginAndUsername(String username, String password);
 }

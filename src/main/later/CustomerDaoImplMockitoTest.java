@@ -1,9 +1,9 @@
 package be.vdab.dao.impl;
 
-import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +32,7 @@ class CustomerDaoImplMockitoTest {
     private PreparedStatement stmt;
 
     @Mock
-    private ResultSet rs;
+    private ResultSet rs1, rs2;
 
     private User user;
     private Customer customer;
@@ -45,26 +45,45 @@ class CustomerDaoImplMockitoTest {
 
         user = new User();
         user.setUserId(1);
-        user.setUsername("user123");
-        user.setPassword("password123");
+        user.setUsername("User123");
+        user.setPassword("Password123");
 
-        when(rs.first()).thenReturn(true);
-        when(rs.getInt(1)).thenReturn(1);
-        when(rs.getString(2)).thenReturn(user.getUsername());
-        when(rs.getString(3)).thenReturn(user.getPassword());
+        when(rs1.first()).thenReturn(true);
+        when(rs1.getInt(1)).thenReturn(1);
+        when(rs1.getString(2)).thenReturn(user.getUsername());
+        when(rs1.getString(3)).thenReturn(user.getPassword());
 
-    }
+        customer = new Customer();
+        customer.setCustomerId(1);
+        customer.setName("Name123");
+        customer.setFirstname("Firstname123");
+        customer.setUsername("Username123");
 
-    @AfterEach
-    void tearDown() {
+        when(rs2.first()).thenReturn(true);
+        when(rs2.getInt(1)).thenReturn(1);
+        when(rs2.getString(2)).thenReturn(customer.getName());
+        when(rs2.getString(3)).thenReturn(customer.getFirstname());
+        when(rs2.getString(4)).thenReturn(customer.getUsername());
     }
 
     @Test
-    void findCustomer() {
+    void findCustomer() throws Exception {
+        Customer dao = new Customer(ds);
+        /*...*/
     }
 
     @Test
     void findByLoginAndUsername() {
     }
 
+    @AfterEach
+    void tearDown() {
+        user = null;
+        customer = null;
+        ds = null;
+        c = null;
+        stmt = null;
+        rs1= null;
+        rs2 = null;
+    }
 }

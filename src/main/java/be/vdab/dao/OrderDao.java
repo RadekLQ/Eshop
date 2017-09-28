@@ -7,11 +7,7 @@ import java.util.List;
 
 public interface OrderDao {
 
-    List<Order> findOrdersFromCustomers(User user); /* implemented */
+    List<Order> findOrdersFromCustomers(User user);
 
-    void saveOrder(Order order); /* implemented */
-
-    void deleteOrder(Order order); /* -*implemented*- */
-
-    void updateOrder(Order order); /* -*implemented*- */
+    void saveOrder(Order order);
 }

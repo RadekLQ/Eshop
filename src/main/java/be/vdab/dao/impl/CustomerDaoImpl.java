@@ -72,7 +72,7 @@ public class CustomerDaoImpl implements CustomerDao {
         Properties prop = new Properties();
         try {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            prop.load(classloader.getResourceAsStream("application.properties"));
+            prop.load(classloader.getResourceAsStream("src/main/later/application.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }

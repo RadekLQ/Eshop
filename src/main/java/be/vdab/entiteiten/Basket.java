@@ -1,28 +1,40 @@
 package be.vdab.entiteiten;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Basket {
 
-    private float amount;
-    private List<Product> producten;
+    private Map<Product, Double> producten = new HashMap<>();
 
     public Basket() {
     }
 
-    public Basket(List<Product> producten, int amount) {
-        this.amount = amount;
-    }
-
-    public void addToBasket(Product product) {
-        producten.add(product);
+    public void addToBasket(Product product, double amount) {
+        producten.put(product, amount);
     }
 
     public void removeFromBasket(Product product) {
         producten.remove(product);
     }
 
-    public List<Product> getProducten() {
+    public Map<Product, Double> getProducten() {
         return producten;
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Basket basket = (Basket) o;
+
+        return getProducten() != null ? getProducten().equals(basket.getProducten()) : basket.getProducten() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return getProducten() != null ? getProducten().hashCode() : 0;
     }
 }

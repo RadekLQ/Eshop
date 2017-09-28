@@ -24,6 +24,10 @@ public class Order implements Comparable<Order> {
         this.eshopId = eshopId;
     }
 
+    public static Comparator<Order> sortBasedOnOrderId() {
+        return Comparator.comparing(Order::getOrderId);
+    }
+
     public int getOrderId() {
         return orderId;
     }
@@ -64,17 +68,15 @@ public class Order implements Comparable<Order> {
         return eshopId;
     }
 
-    public static Comparator<Order> sortBasedOnOrderId() {
-        return Comparator.comparing(Order::getOrderId);
-    }
-
     @Override
-    public int compareTo(Order o) {return this.orderId - o.customerId;}
+    public int compareTo(Order o) {
+        return this.orderId - o.customerId;
+    }
 
     @Override
     public String toString() {
         return String.format("%d %s %s %s %s %s",
-                orderId,"Payment method:",paymentMethod,"Order total:",orderTotal,"date:",
-                date,"customer Id: ", customerId,"e-shop Id:",eshopId);
+                orderId, "Payment method:", paymentMethod, "Order total:", orderTotal, "date:",
+                date, "customer Id: ", customerId, "e-shop Id:", eshopId);
     }
 }
