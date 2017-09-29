@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import static be.vdab.utilities.getConnection.getConnection;
+
+
 public class ProductDaoImpl implements ProductDao { /*to be tested*/
 
     private static final String SELECT_SQL = "SELECT idProduct,name,price,stock FROM product;";

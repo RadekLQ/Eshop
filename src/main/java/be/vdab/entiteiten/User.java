@@ -22,9 +22,8 @@ public class User implements Comparable<User> {
     }
 
     public void setUserId(int userId) {
-        if (userId >= 0) {
-            this.userId = userId;
-        }
+        this.userId = userId;
+
     }
 
     public String getUsername() {
@@ -32,11 +31,7 @@ public class User implements Comparable<User> {
     }
 
     public void setUsername(String username) {
-        if (username != null && !username.isEmpty()) {
-            this.username = username;
-        } else {
-            throw new IllegalArgumentException("Username input is invalid.");
-        }
+        this.username = username;
     }
 
     public String getPassword() {
@@ -44,11 +39,7 @@ public class User implements Comparable<User> {
     }
 
     public void setPassword(String password) {
-        if (password != null && !password.isEmpty()) {
-            this.password = password;
-        } else {
-            throw new IllegalArgumentException("Password input is invalid.");
-        }
+        this.password = password;
     }
 
     @Override

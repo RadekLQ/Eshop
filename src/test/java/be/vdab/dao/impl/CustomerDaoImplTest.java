@@ -4,6 +4,7 @@ import be.vdab.dao.CustomerDao;
 import org.junit.Before;
 import org.junit.Test;
 
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerDaoImplTest {
@@ -16,8 +17,8 @@ public class CustomerDaoImplTest {
     public void findCustomer() {
         CustomerDao customerDao = new CustomerDaoImpl();
         assertThat("Armani").isEqualTo(customerDao.findCustomer("Armani", "Giorgio", "user123").getName());
-        assertThat("user123").isEqualTo(customerDao.findCustomer("Armani", "Giorgio", "user123").getUsername());
         assertThat("Giorgio").isEqualTo(customerDao.findCustomer("Armani", "Giorgio", "user123").getFirstname());
+        assertThat("user123").isEqualTo(customerDao.findCustomer("Armani", "Giorgio", "user123").getUsername());
     }
 
     @Test

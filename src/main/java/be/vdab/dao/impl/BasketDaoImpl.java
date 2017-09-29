@@ -4,6 +4,9 @@ import be.vdab.dao.BasketDao;
 import be.vdab.entiteiten.Basket;
 import be.vdab.entiteiten.Product;
 
+import static be.vdab.utilities.getConnection.getConnection;
+
+
 public class BasketDaoImpl implements BasketDao {
 
     private Basket basket = new Basket();

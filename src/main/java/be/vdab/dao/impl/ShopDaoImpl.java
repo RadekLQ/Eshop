@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import static be.vdab.utilities.getConnection.getConnection;
+
+
 public class ShopDaoImpl implements ShopDao {
 
     private static final String SELECT_SQL = "SELECT idEshop,Info,address FROM eshop;";
