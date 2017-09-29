@@ -1,13 +1,13 @@
 package be.vdab.dao;
 
+import be.vdab.entiteiten.Customer;
 import be.vdab.entiteiten.Order;
-import be.vdab.entiteiten.User;
 
 import java.util.List;
 
 public interface OrderDao {
 
-    List<Order> findOrdersFromCustomers(User user);
+    List<Order> findOrdersFromCustomers(Customer customer);
 
     void saveOrder(Order order);
 }

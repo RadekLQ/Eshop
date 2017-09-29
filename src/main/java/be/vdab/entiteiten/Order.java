@@ -1,7 +1,8 @@
 package be.vdab.entiteiten;
 
+import java.sql.Date;
 import java.util.Comparator;
-import java.util.Date;
+
 
 public class Order implements Comparable<Order> {
 
@@ -12,14 +13,11 @@ public class Order implements Comparable<Order> {
     private int customerId;
     private int eshopId;
 
-    public Order() {
-    }
-
     public Order(int orderId, String paymentMethod, int orderTotal, Date date, int customerId, int eshopId) {
         this.orderId = orderId;
         this.paymentMethod = paymentMethod;
         this.orderTotal = orderTotal;
-        this.date = date;
+        setDate(date);
         this.customerId = customerId;
         this.eshopId = eshopId;
     }
@@ -56,7 +54,7 @@ public class Order implements Comparable<Order> {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(java.sql.Date date) {
         this.date = date;
     }
 

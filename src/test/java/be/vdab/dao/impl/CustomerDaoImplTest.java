@@ -4,12 +4,12 @@ import be.vdab.dao.CustomerDao;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerDaoImplTest {
 
     @Before
-    public void init(){
+    public void init() {
     }
 
     @Test

@@ -5,12 +5,12 @@ import java.util.Map;
 
 public class Basket {
 
-    private Map<Product, Double> producten = new HashMap<>();
+    private Map<Product, Integer> producten = new HashMap<>();
 
     public Basket() {
     }
 
-    public void addToBasket(Product product, double amount) {
+    public void addToBasket(Product product, int amount) {
         producten.put(product, amount);
     }
 
@@ -18,7 +18,7 @@ public class Basket {
         producten.remove(product);
     }
 
-    public Map<Product, Double> getProducten() {
+    public Map<Product, Integer> getProducten() {
         return producten;
 
     }

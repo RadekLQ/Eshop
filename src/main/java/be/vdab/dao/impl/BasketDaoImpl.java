@@ -14,7 +14,7 @@ public class BasketDaoImpl implements BasketDao {
     }
 
     @Override
-    public void addProductToBasket(Product product, Double amount) {
+    public void addProductToBasket(Product product, int amount) {
         basket.addToBasket(product, amount);
     }
 

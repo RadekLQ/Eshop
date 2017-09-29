@@ -14,6 +14,4 @@ public interface BasketDao {
     Basket getBasket();
 
     void clearBasket();
-
-
 }

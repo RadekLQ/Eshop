@@ -7,14 +7,6 @@ public class User implements Comparable<User> {
     private String username;
     private String password;
 
-    public User() {
-    }
-
-    public User(String username, String password) {
-        setUsername(username);
-        setPassword(password);
-    }
-
     public User(int userId, String username, String password) {
         setUserId(userId);
         setUsername(username);
@@ -45,8 +37,6 @@ public class User implements Comparable<User> {
         } else {
             throw new IllegalArgumentException("Username input is invalid.");
         }
-
-
     }
 
     public String getPassword() {

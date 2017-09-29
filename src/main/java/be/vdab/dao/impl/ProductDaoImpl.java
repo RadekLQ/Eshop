@@ -5,14 +5,13 @@ import be.vdab.entiteiten.Product;
 import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class ProductDaoImpl implements ProductDao {
+public class ProductDaoImpl implements ProductDao { /*to be tested*/
 
     private static final String SELECT_SQL = "SELECT idProduct,name,price,stock FROM product;";
     private static final Logger LOGGER = Logger.getLogger(ProductDaoImpl.class);
@@ -25,12 +24,6 @@ public class ProductDaoImpl implements ProductDao {
 
     public ProductDaoImpl() {
         products = Lists.newArrayList();
-    }
-
-    private DataSource ds;
-
-    public ProductDaoImpl(DataSource ds) {
-        this.ds = ds;
     }
 
     @Override

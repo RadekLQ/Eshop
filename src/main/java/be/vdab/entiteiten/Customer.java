@@ -1,6 +1,5 @@
 package be.vdab.entiteiten;
 
-import javax.sql.DataSource;
 import java.util.Comparator;
 
 public class Customer extends User {
@@ -9,22 +8,14 @@ public class Customer extends User {
     private String firstname;
     private String email;
     private String address;
-    private DataSource ds;
 
-    public Customer() {
-    }
-
-
-    public Customer(String username, String password, int customerId, String name, String firstname, String email, String address) {
-        super(username, password);
+    public Customer(int userId, String username, String password, int customerId, String name, String firstname, String email, String address) {
+        super(userId, username, password);
         this.customerId = customerId;
         this.name = name;
         this.firstname = firstname;
         this.email = email;
         this.address = address;
-    }
-
-    public Customer(DataSource ds) {
     }
 
     public static Comparator<Customer> sortBasedOncustomerId() {
@@ -85,27 +76,17 @@ public class Customer extends User {
 
         Customer customer = (Customer) o;
 
-        if (customerId != customer.customerId) return false;
-        if (!name.equals(customer.name)) return false;
-        if (!firstname.equals(customer.firstname)) return false;
-        if (!email.equals(customer.email)) return false;
-        return address.equals(customer.address);
+        return name.equals(customer.name);
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + customerId;
         result = 31 * result + name.hashCode();
-        result = 31 * result + firstname.hashCode();
-        result = 31 * result + email.hashCode();
-        result = 31 * result + address.hashCode();
         return result;
     }
 
     public int compareTo(Customer o) {
         return this.customerId - o.customerId;
     }
-
-
 }

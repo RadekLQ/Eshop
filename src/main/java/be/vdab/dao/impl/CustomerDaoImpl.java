@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
-
 public class CustomerDaoImpl implements CustomerDao {
 
     @Override
@@ -25,9 +24,9 @@ public class CustomerDaoImpl implements CustomerDao {
             ResultSet rs = stmt.executeQuery();
 
             int customerId = 0;
-            String password = "customerId";
-            String address = "";
-            String email = "";
+            String password = "password123";
+            String address = "77990 Le Mesnil-Amelot, France";
+            String email = "vim.yslaurent@yvessaintlaurent.fr";
 
             if (rs.next()) {
 
@@ -37,7 +36,15 @@ public class CustomerDaoImpl implements CustomerDao {
                 email = rs.getString("email");
             }
 
-            return new Customer(username, password, customerId, name, firstname, address, email);
+            return new Customer(rs.getInt("idUser"),
+                    rs.getString("username"),
+                    rs.getString("password"),
+                    rs.getInt("idCustomer"),
+                    rs.getString("name"),
+                    rs.getString("firstName"),
+                    rs.getString("eMail"),
+                    rs.getString("deliveryAdress")
+            );
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,7 +64,6 @@ public class CustomerDaoImpl implements CustomerDao {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-
                 return new User(rs.getInt("customerId"), rs.getString("Username"), rs.getString("Password"));
             }
 

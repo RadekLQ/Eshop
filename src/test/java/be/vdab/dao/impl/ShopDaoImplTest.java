@@ -8,10 +8,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ShopDaoImplTest {
+public class ShopDaoImplTest {
 
     @Test
-    void listAllShops() {
+    public void listAllShops() {
 
         List<Shop> shops;
         ShopDao shopLijst = new ShopDaoImpl();
