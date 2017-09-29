@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static be.vdab.utilities.getConnection.getConnection;
+import static be.vdab.utilities.GetConnection.getConnection;
+
 
 
 public class ShopDaoImpl implements ShopDao {
@@ -47,18 +48,6 @@ public class ShopDaoImpl implements ShopDao {
         } catch (SQLException e) {
             LOGGER.error("Could nog connect to database: " + e);
         }
-    }
-
-    private Connection getConnection() throws SQLException {
-        Properties prop = new Properties();
-        try {
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            prop.load(classloader.getResourceAsStream("src/main/later/application.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return DriverManager.getConnection(prop.getProperty("jdbc.url"), prop.getProperty("jdbc.user"),
-                prop.getProperty("jdbc.password"));
     }
 
     private void addToList(String sql) {

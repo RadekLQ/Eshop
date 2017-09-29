@@ -10,8 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static be.vdab.utilities.getConnection.getConnection;
-
+import static be.vdab.utilities.GetConnection.getConnection;
 
 public class CustomerDaoImpl implements CustomerDao {
 

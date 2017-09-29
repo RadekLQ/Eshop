@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static be.vdab.utilities.getConnection.getConnection;
+import static be.vdab.utilities.GetConnection.getConnection;
 
 
-public class ProductDaoImpl implements ProductDao { /*to be tested*/
+
+public class ProductDaoImpl implements ProductDao {
 
     private static final String SELECT_SQL = "SELECT idProduct,name,price,stock FROM product;";
     private static final Logger LOGGER = Logger.getLogger(ProductDaoImpl.class);
@@ -33,18 +34,6 @@ public class ProductDaoImpl implements ProductDao { /*to be tested*/
     public List<Product> findProducts(String productname) {
         addToList(SELECT_SQL + " WHERE name = '" + productname + "';");
         return products;
-    }
-
-    private Connection getConnection() throws SQLException {
-        Properties prop = new Properties();
-        try {
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            prop.load(classloader.getResourceAsStream("src/main/later/application.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return DriverManager.getConnection(prop.getProperty("jdbc.url"),
-                prop.getProperty("jdbc.user"), prop.getProperty("jdbc.password"));
     }
 
     private void addToList(String sql) {

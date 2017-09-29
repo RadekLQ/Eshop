@@ -8,7 +8,7 @@ import com.google.common.collect.Lists;
 import java.sql.*;
 import java.util.List;
 
-import static be.vdab.utilities.getConnection.getConnection;
+import static be.vdab.utilities.GetConnection.getConnection;
 
 public class OrderDaoImpl implements OrderDao {
 
@@ -17,7 +17,7 @@ public class OrderDaoImpl implements OrderDao {
 
         List<Order> orders = Lists.newArrayList();
 
-        String sql = "Select * from eshop.order where idCustomer = ?";
+        String sql = "SELECT * FROM eshop.`order` where cusomerId=?;";
         try (Connection connecion = getConnection(); PreparedStatement stmt = connecion.prepareStatement(sql)) {
             stmt.setInt(1, customer.getCustomerId());
 
@@ -43,7 +43,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public void saveOrder(Order order) {
 
-        String sql = "INSERT INTO order (idOrder,paymentMethod,orderTotal,dateOrder,cusomerId,eshopId) VALUES(?,?,?,?,?,?);";
+        String sql = "INSERT INTO eshop.`order` (idOrder,paymentMethod,orderTotal,dateOrder,cusomerId,eshopId) VALUES(?,?,?,?,?,?);";
 
         try (Connection connection = getConnection(); PreparedStatement stmt = connection.prepareStatement(sql)) {
 

@@ -39,7 +39,6 @@ public class BasketDaoImplTest {
         assertThat(basket).isInstanceOfAny(BasketDaoImpl.class);
         assertThat(basket.getBasket().getProducten()).hasSize(7);
         assertThat(basket).isNotNull();
-//        assertThat(basket.getBasket().getProducten()).containsKey(new Product(7, "item2", 123.01, 7));
     }
 
     @Test
@@ -47,8 +46,6 @@ public class BasketDaoImplTest {
         Product product = new Product(8, "item1", 131.12, 6);
         basket.addProductToBasket(product, 1);
         assertThat(basket.getBasket().getProducten()).hasSize(8);
-//        assertThat(basket.getBasket().getProducten())
-//                .containsKeys(new Product(8, "item1", 131.12, 6));
     }
 
     @Test
